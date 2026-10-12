@@ -10,6 +10,10 @@ import {
   KeyRound,
   Handshake,
   ArrowRight,
+  Users,
+  Clock,
+  TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
 
 import logoAsset from "@/assets/jps-logo.jpeg.asset.json";
@@ -262,6 +266,63 @@ const services = [
   },
 ];
 
+const demoLeads = [
+  {
+    name: "Aarav Sharma",
+    interest: "Buying a 3 BHK in Gomti Nagar",
+    budget: "₹65 – 80 L",
+    location: "Gomti Nagar",
+    status: "Site visit scheduled",
+    date: "2 days ago",
+  },
+  {
+    name: "Priya Verma",
+    interest: "Investing in residential plots",
+    budget: "₹40 – 55 L",
+    location: "Sushant Golf City",
+    status: "Shortlisted 3 options",
+    date: "4 days ago",
+  },
+  {
+    name: "Mohit Agarwal",
+    interest: "Selling a 2 BHK apartment",
+    budget: "₹45 L (expected)",
+    location: "Indira Nagar",
+    status: "Listing documented",
+    date: "1 week ago",
+  },
+  {
+    name: "Sneha Tiwari",
+    interest: "4 BHK villa for family",
+    budget: "₹1.5 – 2 Cr",
+    location: "Shaheed Path",
+    status: "Negotiation in progress",
+    date: "1 week ago",
+  },
+  {
+    name: "Rahul Mishra",
+    interest: "Commercial shop on rent",
+    budget: "₹35k / month",
+    location: "Hazratganj",
+    status: "Visited 2 properties",
+    date: "2 weeks ago",
+  },
+  {
+    name: "Ananya Gupta",
+    interest: "2 BHK for end-use",
+    budget: "₹50 – 65 L",
+    location: "Gomti Nagar Extension",
+    status: "Deal closed",
+    date: "3 weeks ago",
+  },
+];
+
+const leadStats = [
+  { label: "Active leads", value: "120+", icon: Users },
+  { label: "Avg. response time", value: "< 24 hrs", icon: Clock },
+  { label: "Closure rate", value: "78%", icon: TrendingUp },
+];
+
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -282,6 +343,9 @@ function Index() {
           <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
             <a href="#projects" className="text-muted-foreground transition-colors hover:text-primary">
               Projects
+            </a>
+            <a href="#leads" className="text-muted-foreground transition-colors hover:text-primary">
+              Recent Enquiries
             </a>
             <a href="#locations" className="text-muted-foreground transition-colors hover:text-primary">
               Locations
@@ -413,6 +477,146 @@ function Index() {
             </article>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* Demo Leads Showcase */}
+      <section id="leads" className="border-y border-border bg-secondary/50">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+          <Reveal>
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+                  Client Engagements
+                </p>
+                <h2 className="mt-2 font-serif text-3xl font-bold sm:text-4xl">
+                  Recent Enquiries at a Glance
+                </h2>
+              </div>
+              <p className="max-w-md text-sm text-muted-foreground">
+                A snapshot of active and recently closed client requirements across Lucknow.
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Stats bar */}
+          <Reveal delay={80}>
+            <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {leadStats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 shadow-sm"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <stat.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-serif text-2xl font-bold text-foreground">{stat.value}</p>
+                    <p className="text-xs text-muted-foreground">{stat.label}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* Leads table — desktop */}
+          <Reveal delay={120}>
+            <div className="hidden overflow-hidden rounded-xl border border-border bg-card shadow-sm md:block">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-border bg-secondary/60 text-xs uppercase tracking-wide text-muted-foreground">
+                    <th className="px-6 py-3 font-semibold">Client</th>
+                    <th className="px-6 py-3 font-semibold">Interest</th>
+                    <th className="px-6 py-3 font-semibold">Budget</th>
+                    <th className="px-6 py-3 font-semibold">Location</th>
+                    <th className="px-6 py-3 font-semibold">Status</th>
+                    <th className="px-6 py-3 text-right font-semibold">Updated</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {demoLeads.map((lead) => (
+                    <tr
+                      key={lead.name}
+                      className="border-b border-border/60 transition-colors last:border-0 hover:bg-secondary/40"
+                    >
+                      <td className="px-6 py-4 font-medium text-foreground">{lead.name}</td>
+                      <td className="px-6 py-4 text-muted-foreground">{lead.interest}</td>
+                      <td className="px-6 py-4 font-medium text-foreground">{lead.budget}</td>
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+                          <MapPin className="h-3.5 w-3.5 text-primary" /> {lead.location}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
+                            lead.status === "Deal closed"
+                              ? "bg-emerald-50 text-emerald-700"
+                              : lead.status === "Negotiation in progress"
+                                ? "bg-amber-50 text-amber-700"
+                                : "bg-sky-50 text-sky-700"
+                          }`}
+                        >
+                          {lead.status === "Deal closed" && (
+                            <CheckCircle2 className="h-3.5 w-3.5" />
+                          )}
+                          {lead.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right text-xs text-muted-foreground">
+                        {lead.date}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
+
+          {/* Leads cards — mobile */}
+          <div className="grid gap-4 md:hidden">
+            {demoLeads.map((lead, i) => (
+              <Reveal key={lead.name} delay={(i % 2) * 80}>
+                <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="font-semibold text-foreground">{lead.name}</p>
+                      <p className="mt-0.5 text-sm text-muted-foreground">{lead.interest}</p>
+                    </div>
+                    <span
+                      className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${
+                        lead.status === "Deal closed"
+                          ? "bg-emerald-50 text-emerald-700"
+                          : lead.status === "Negotiation in progress"
+                            ? "bg-amber-50 text-amber-700"
+                            : "bg-sky-50 text-sky-700"
+                      }`}
+                    >
+                      {lead.status}
+                    </span>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs">
+                    <div>
+                      <p className="text-muted-foreground">Budget</p>
+                      <p className="font-medium text-foreground">{lead.budget}</p>
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground">Location</p>
+                      <p className="font-medium text-foreground">{lead.location}</p>
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground">Updated</p>
+                      <p className="font-medium text-foreground">{lead.date}</p>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            Demo data shown for illustration. Client names are fictional.
+          </p>
         </div>
       </section>
 
